@@ -1,40 +1,125 @@
-<section class="contenedor">
-  <h2>Lista de productos</h2>
+<!-- ========== FORMULARIO ========== -->
+<section class="tarjeta" [class.modo-edicion]="idEditando()">
+  <h2 class="tarjeta-titulo">
+    @if (idEditando()) {
+      Editar producto <span class="id-edicion">· {{ idEditando() }}</span>
+    } @else {
+      Registrar producto
+    }
+  </h2>
 
-  <button type="button" (click)="cargarProductos()">Recargar lista</button>
+  <form [formGroup]="formulario" (ngSubmit)="guardar()">
+    <div class="campos">
+      <!-- Nombre -->
+      <div class="campo">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" type="text" formControlName="nombre" placeholder="Laptop Lenovo" />
+        @if (campos.nombre.touched && campos.nombre.invalid) {
+          <small class="texto-error">El nombre es obligatorio y debe contener Letras.</small>
+        }
+      </div>
 
-  @if (mensajeError()) {
-    <p class="error">{{ mensajeError() }}</p>
-  }
+      <!-- Precio -->
+      <div class="campo">
+        <label for="precio">Precio ($)</label>
+        <input id="precio" type="number" step="0.01" formControlName="precio" placeholder="25.50" />
+        @if (campos.precio.touched && campos.precio.hasError('required')) {
+          <small class="texto-error">El precio es obligatorio y debe ser numérico.</small>
+        }
+        @if (campos.precio.touched && campos.precio.hasError('min')) {
+          <small class="texto-error">Debe ser mayor o igual a 0.</small>
+        }
+      </div>
+
+      <!-- Stock -->
+      <div class="campo">
+        <label for="stock">Stock</label>
+        <input id="stock" type="number" step="1" formControlName="stock" placeholder="10" />
+        @if (campos.stock.touched && campos.stock.hasError('required')) {
+          <small class="texto-error">El stock es obligatorio.</small>
+        }
+        @if (campos.stock.touched && campos.stock.hasError('min')) {
+          <small class="texto-error">Debe ser mayor o igual a 0.</small>
+        }
+        @if (campos.stock.touched && campos.stock.hasError('entero')) {
+          <small class="texto-error">Debe ser un número entero.</small>
+        }
+      </div>
+
+      <!-- Categoría -->
+      <div class="campo">
+        <label for="categoria">Categoría</label>
+        <input id="categoria" type="text" formControlName="categoria" placeholder="Tecnologia" />
+        @if (campos.categoria.touched && campos.categoria.invalid) {
+          <small class="texto-error">La categoría es obligatoria y debe contener Letras.</small>
+        }
+      </div>
+    </div>
+
+    <div class="botones">
+      <button type="submit" class="btn btn-principal" [disabled]="formulario.invalid || guardando()">
+        {{ guardando() ? 'Guardando...' : idEditando() ? 'Actualizar' : 'Registrar' }}
+      </button>
+      @if (idEditando()) {
+        <button type="button" class="btn btn-secundario" (click)="cancelarEdicion()">
+          Cancelar edición
+        </button>
+      }
+    </div>
+  </form>
+</section>
+
+<!-- ========== MENSAJES ========== -->
+@if (mensajeExito()) {
+  <div class="alerta alerta-exito">✓ {{ mensajeExito() }}</div>
+}
+@if (mensajeError()) {
+  <div class="alerta alerta-error">✕ {{ mensajeError() }}</div>
+}
+
+<!-- ========== TABLA ========== -->
+<section class="tarjeta tarjeta-tabla">
+  <div class="tabla-encabezado">
+    <h2 class="tarjeta-titulo">Lista de productos</h2>
+    <span class="sincronizado">Sincronizado en tiempo real</span>
+  </div>
 
   @if (cargando()) {
-    <p>Cargando productos...</p>
+    <p class="cargando">Cargando productos...</p>
   } @else {
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Precio</th>
-          <th>Stock</th>
-          <th>Categoría</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (producto of productos(); track producto.id) {
+    <div class="tabla-contenedor">
+      <table>
+        <thead>
           <tr>
-            <td>{{ producto.id }}</td>
-            <td>{{ producto.nombre }}</td>
-            <td>$ {{ producto.precio }}</td>
-            <td>{{ producto.stock }}</td>
-            <td>{{ producto.categoria }}</td>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th class="derecha">Precio</th>
+            <th class="derecha">Stock</th>
+            <th class="derecha">Acciones</th>
           </tr>
-        } @empty {
-          <tr>
-            <td colspan="5">No hay productos registrados.</td>
-          </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (producto of productos(); track producto.id) {
+            <tr [class.fila-editando]="producto.id === idEditando()">
+              <td>
+                <span class="nombre">{{ producto.nombre }}</span>
+                <span class="id">{{ producto.id }}</span>
+              </td>
+              <td>{{ producto.categoria }}</td>
+              <td class="derecha">$ {{ producto.precio | number: '1.2-2' }}</td>
+              <td class="derecha">{{ producto.stock }}</td>
+              <td class="derecha acciones">
+                <button type="button" class="btn-tabla btn-editar" (click)="editar(producto)">Editar</button>
+                <button type="button" class="btn-tabla btn-eliminar" (click)="eliminar(producto)">Eliminar</button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="vacio">No hay productos registrados.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   }
 </section>

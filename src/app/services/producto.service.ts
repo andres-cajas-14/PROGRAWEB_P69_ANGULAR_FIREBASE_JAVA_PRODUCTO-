@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
-import {
-  collection,
-  getDocs,
-  addDoc,
-  doc,
-  updateDoc,
-  deleteDoc,
-} from 'firebase/firestore';
+import { collection, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { collectionData } from 'rxfire/firestore';
+import { Observable } from 'rxjs';
 import { db } from '../firebase.config';
 import { Producto } from '../models/producto';
 
@@ -17,14 +12,9 @@ export class ProductoService {
   // Referencia a la colección "productos" de Firestore
   private productosRef = collection(db, 'productos');
 
-  // READ: obtiene todos los documentos de la colección
-  async obtenerProductos(): Promise<Producto[]> {
-    const resultado = await getDocs(this.productosRef);
-
-    return resultado.docs.map((documento) => ({
-      ...(documento.data() as Producto),
-      id: documento.id,
-    }));
+  // READ: devuelve un Observable que emite la lista en cada cambio
+  obtenerProductos(): Observable<Producto[]> {
+    return collectionData(this.productosRef, { idField: 'id' }) as Observable<Producto[]>;
   }
 
   // CREATE: registra un producto nuevo (Firestore genera el ID)

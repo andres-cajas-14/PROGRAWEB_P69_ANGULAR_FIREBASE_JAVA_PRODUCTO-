@@ -1,32 +1,332 @@
-.contenedor {
-  max-width: 900px;
-  margin: 20px auto;
-  font-family: Arial, sans-serif;
+/* ---------- Tarjetas ---------- */
+.tarjeta {
+  background-color: white;
+  border-radius: 16px;
+  padding: 22px 26px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.07);
+  border: 1px solid #e0e7ff;
+}
+
+.tarjeta-titulo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e3a8a;
+}
+
+/* Barra de color antes de cada título */
+.tarjeta-titulo::before {
+  content: '';
+  width: 5px;
+  height: 20px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #3b82f6, #6366f1);
+}
+
+/* ---------- Modo edición ---------- */
+.modo-edicion {
+  border-left: 5px solid #f59e0b;
+  background-color: #fffdf5;
+}
+
+.modo-edicion .tarjeta-titulo {
+  color: #b45309;
+}
+
+.modo-edicion .tarjeta-titulo::before {
+  background: #f59e0b;
+}
+
+.id-edicion {
+  font-size: 13px;
+  font-weight: 400;
+  color: #92400e;
+}
+
+/* ---------- Formulario ---------- */
+.campos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.campo input {
+  height: 42px;
+  padding: 0 14px;
+  background-color: #f8fafc;
+  border: 1.5px solid #dbe3f0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #0f172a;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.campo input:hover {
+  border-color: #a5b4fc;
+}
+
+.campo input:focus {
+  outline: none;
+  background-color: white;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+.campo input::placeholder {
+  color: #a0aec0;
+}
+
+/* Campo con error (clases que agrega Angular) */
+.campo input.ng-invalid.ng-touched {
+  border-color: #ef4444;
+  background-color: #fff5f5;
+}
+
+.campo input.ng-invalid.ng-touched:focus {
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+}
+
+.texto-error {
+  font-size: 12px;
+  color: #dc2626;
+}
+
+/* ---------- Botones del formulario ---------- */
+.botones {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.btn {
+  height: 42px;
+  padding: 0 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
+}
+
+.btn-principal {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.btn-principal:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+.btn-principal:disabled {
+  background: #e2e8f0;
+  color: #94a3b8;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.btn-secundario {
+  background-color: white;
+  color: #475569;
+  border: 1.5px solid #cbd5e1;
+}
+
+.btn-secundario:hover {
+  background-color: #f1f5f9;
+}
+
+/* ---------- Mensajes ---------- */
+.alerta {
+  padding: 13px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.alerta-exito {
+  background-color: #ecfdf5;
+  color: #047857;
+  border-left: 5px solid #10b981;
+}
+
+.alerta-error {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  border-left: 5px solid #ef4444;
+}
+
+/* ---------- Tabla ---------- */
+.tarjeta-tabla {
+  padding: 0;
+  overflow: hidden;
+}
+
+.tabla-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 26px;
+}
+
+.tabla-encabezado .tarjeta-titulo {
+  margin: 0;
+}
+
+.sincronizado {
+  font-size: 12px;
+  font-weight: 500;
+  color: #059669;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 15px;
-}
-
-th, td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: left;
+  font-size: 14px;
 }
 
 th {
-  background-color: #1e3a8a;
-  color: white;
+  background-color: #eef2ff;
+  color: #3730a3;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: left;
+  padding: 12px 26px;
 }
 
-.error {
-  color: #b91c1c;
-  font-weight: bold;
+td {
+  padding: 13px 26px;
+  border-bottom: 1px solid #eef2f7;
+  vertical-align: middle;
 }
 
-button {
-  padding: 8px 14px;
+tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+tbody tr {
+  transition: background-color 0.15s;
+}
+
+tbody tr:hover {
+  background-color: #eef4ff;
+}
+
+.fila-editando,
+.fila-editando:hover,
+tbody tr.fila-editando:nth-child(even) {
+  background-color: #fef3c7;
+}
+
+.nombre {
+  display: block;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.id {
+  display: block;
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.derecha {
+  text-align: right;
+}
+
+td.derecha:nth-child(3) {
+  color: #047857;
+  font-weight: 600;
+}
+
+.acciones {
+  white-space: nowrap;
+}
+
+/* ---------- Botones de la tabla ---------- */
+.btn-tabla {
+  padding: 6px 14px;
+  margin-left: 6px;
+  border: none;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
+  transition: background-color 0.15s, transform 0.15s;
+}
+
+.btn-tabla:hover {
+  transform: translateY(-1px);
+}
+
+.btn-editar {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.btn-editar:hover {
+  background-color: #bfdbfe;
+}
+
+.btn-eliminar {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.btn-eliminar:hover {
+  background-color: #fecaca;
+}
+
+.vacio,
+.cargando {
+  text-align: center;
+  color: #64748b;
+  padding: 28px;
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+@media (max-width: 768px) {
+  .campos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .campos {
+    grid-template-columns: 1fr;
+  }
+
+  .tabla-encabezado {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
 }

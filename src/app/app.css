@@ -1,0 +1,27 @@
+.contenedor-app {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 28px 16px;
+}
+
+.encabezado {
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  color: white;
+  border-radius: 16px;
+  padding: 22px 28px;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+.encabezado h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.encabezado p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #dbeafe;
+}
