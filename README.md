@@ -8,7 +8,7 @@ Aplicación web desarrollada en **Angular** que permite **registrar, consultar, 
 
 ##  Enlaces
 
-- **Aplicación publicada (Vercel):** https://TU-PROYECTO.vercel.app
+- **Aplicación publicada (Vercel):** https://crud-productos-angular-firebas.vercel.app
 - **Repositorio (GitHub):** https://github.com/andres-cajas-14/PROGRAWEB_P69_ANGULAR_FIREBASE_JAVA_PRODUCTO-
 
 ---
