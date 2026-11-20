@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 import { ProductoService } from '../../services/producto.service';
 import { Producto } from '../../models/producto';
 
-// Validador personalizado: el valor debe ser un número entero
+
 function soloEnteros(control: AbstractControl): ValidationErrors | null {
   const valor = control.value;
   if (valor === null || valor === '') {
@@ -28,7 +28,7 @@ function soloEnteros(control: AbstractControl): ValidationErrors | null {
   styleUrl: './productos.css',
 })
 export class Productos implements OnInit, OnDestroy {
-  // ---------- Estado ----------
+  
   productos = signal<Producto[]>([]);
   cargando = signal(true);
   guardando = signal(false);
@@ -38,7 +38,7 @@ export class Productos implements OnInit, OnDestroy {
 
   private suscripcion?: Subscription;
 
-  // ---------- Formulario con validaciones ----------
+  
   formulario = new FormGroup({
     nombre: new FormControl('', {
       nonNullable: true,
@@ -59,14 +59,14 @@ export class Productos implements OnInit, OnDestroy {
     }),
   });
 
-  // Atajo para usar los campos en el HTML: campos.nombre, campos.precio...
+  
   get campos() {
     return this.formulario.controls;
   }
 
   constructor(private productoService: ProductoService) {}
 
-  // ---------- READ en tiempo real ----------
+ 
   ngOnInit(): void {
     this.suscripcion = this.productoService.obtenerProductos().subscribe({
       next: (datos) => {
@@ -85,11 +85,11 @@ export class Productos implements OnInit, OnDestroy {
     this.suscripcion?.unsubscribe();
   }
 
-  // ---------- CREATE y UPDATE ----------
+  
   async guardar(): Promise<void> {
     this.limpiarMensajes();
 
-    // Impide enviar datos inválidos
+    
     if (this.formulario.invalid) {
       this.formulario.markAllAsTouched();
       this.mensajeError.set('Corrija los campos marcados antes de guardar.');
@@ -123,7 +123,7 @@ export class Productos implements OnInit, OnDestroy {
     }
   }
 
-  // Carga el producto seleccionado en el formulario
+ 
   editar(producto: Producto): void {
     this.limpiarMensajes();
     this.idEditando.set(producto.id ?? null);
@@ -136,13 +136,13 @@ export class Productos implements OnInit, OnDestroy {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Vuelve al modo crear y limpia el formulario
+ 
   cancelarEdicion(): void {
     this.idEditando.set(null);
     this.formulario.reset();
   }
 
-  // ---------- DELETE con confirmación ----------
+ 
   async eliminar(producto: Producto): Promise<void> {
     this.limpiarMensajes();
 

@@ -1,4 +1,4 @@
-/* ---------- Tarjetas ---------- */
+
 .tarjeta {
   background-color: white;
   border-radius: 16px;
@@ -18,7 +18,7 @@
   color: #1e3a8a;
 }
 
-/* Barra de color antes de cada título */
+
 .tarjeta-titulo::before {
   content: '';
   width: 5px;
@@ -27,7 +27,7 @@
   background: linear-gradient(180deg, #3b82f6, #6366f1);
 }
 
-/* ---------- Modo edición ---------- */
+
 .modo-edicion {
   border-left: 5px solid #f59e0b;
   background-color: #fffdf5;
@@ -47,7 +47,7 @@
   color: #92400e;
 }
 
-/* ---------- Formulario ---------- */
+
 .campos {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -155,7 +155,7 @@
   background-color: #f1f5f9;
 }
 
-/* ---------- Mensajes ---------- */
+
 .alerta {
   padding: 13px 18px;
   border-radius: 12px;
@@ -176,7 +176,7 @@
   border-left: 5px solid #ef4444;
 }
 
-/* ---------- Tabla ---------- */
+
 .tarjeta-tabla {
   padding: 0;
   overflow: hidden;

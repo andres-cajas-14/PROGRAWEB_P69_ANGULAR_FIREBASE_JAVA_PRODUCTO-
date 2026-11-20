@@ -9,7 +9,7 @@ Aplicación web desarrollada en **Angular** que permite **registrar, consultar, 
 ##  Enlaces
 
 - **Aplicación publicada (Vercel):** https://TU-PROYECTO.vercel.app
-- **Repositorio (GitHub):** https://github.com/andres-cajas-14/CRUD-productos
+- **Repositorio (GitHub):** https://github.com/andres-cajas-14/PROGRAWEB_P69_ANGULAR_FIREBASE_JAVA_PRODUCTO-
 
 ---
 
@@ -104,21 +104,20 @@ Ejemplo de documento en Firestore:
 src/
 ├── app/
 │   ├── components/productos/
-│   │   ├── productos.ts          # Lógica: formulario, validaciones y acciones
-│   │   ├── productos.html        # Formulario y tabla
-│   │   └── productos.css         # Estilos del componente
+│   │   ├── productos.ts         
+│   │   ├── productos.html       
+│   │   └── productos.css         
 │   ├── models/
-│   │   └── producto.ts           # Interfaz Producto
+│   │   └── producto.ts           
 │   ├── services/
-│   │   └── producto.service.ts   # ProductoService: las 4 operaciones con Firestore
-│   ├── firebase.config.ts        # Inicializa Firebase y exporta la instancia de Firestore
-│   ├── app.ts / app.html         # Componente principal
-├── environments/
-│   ├── environment.example.ts    # Plantilla de configuración (sí se sube)
-│   └── environment.ts            # Credenciales reales (NO se sube, está en .gitignore)
+│   │   └── producto.service.ts   
+│   ├── firebase.config.ts        
+│   ├── app.ts / app.html        
+│   ├── environment.example.ts    
+│   └── environment.ts           
 scripts/
-└── set-env.mjs                   # Genera environment.ts en Vercel desde variables de entorno
-vercel.json                       # Comando de compilación y carpeta de salida para Vercel
+└── set-env.mjs                   
+vercel.json                       
 ```
 
 **Separación de responsabilidades:** el componente `Productos` no importa nada de Firebase. Solo llama a los métodos de `ProductoService`, que es el único que accede a Firestore.
@@ -161,32 +160,32 @@ service cloud.firestore {
 **Requisitos:** Node.js 20 o superior, npm y Angular CLI (`npm install -g @angular/cli`).
 
 ```bash
+# 1. Clonar el repositorio y entrar en la carpeta del proyecto
+git clone https://github.com/andres-cajas-14/PROGRAWEB_P69_ANGULAR_FIREBASE_JAVA_PRODUCTO-.git
+cd PROGRAWEB_P69_ANGULAR_FIREBASE_JAVA_PRODUCTO-
 
-git clone https://github.com/andres-cajas-14/CRUD-productos.git
-cd CRUD-productos
-
-
+# 2. Instalar las dependencias
 npm install
 ```
 
 **3. Configurar las credenciales de Firebase.** Copiar la plantilla:
 
 ```bash
-
+# Windows (PowerShell)
 Copy-Item src/environments/environment.example.ts src/environments/environment.ts
 
-
+# Linux / macOS
 cp src/environments/environment.example.ts src/environments/environment.ts
 ```
 
 Luego abrir `src/environments/environment.ts` y reemplazar los valores de ejemplo por los del `firebaseConfig` del proyecto.
 
 ```bash
-
+# 4. Ejecutar la aplicación
 ng serve -o
 ```
 
-La aplicación se abre en `http://localhost:4200`. Todos los comandos se ejecutan dentro de la carpeta `CRUD-productos`.
+La aplicación se abre en `http://localhost:4200`. Todos los comandos se ejecutan dentro de la carpeta `PROGRAWEB_P69_ANGULAR_FIREBASE_JAVA_PRODUCTO-`, que se crea al clonar el repositorio.
 
 **Pruebas unitarias:**
 
